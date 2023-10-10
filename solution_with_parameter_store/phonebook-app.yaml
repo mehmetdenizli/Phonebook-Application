@@ -22,7 +22,7 @@ Parameters:
     Type: List<AWS::EC2::Subnet::Id>
   MyDbusername:
     Type: AWS::SSM::Parameter::Value<String>
-    Default: /osvaldo/phonebook/username
+    Default: /Kabacargah/phonebook/username
 
 Resources:
   
@@ -90,10 +90,10 @@ Resources:
                 pip3 install boto3
                 yum install git -y
                 echo "${MyDBURI}" > /home/ec2-user/dbserver.endpoint
-                TOKEN=$(aws --region=us-east-1 ssm get-parameter --name /osvaldo/phonebook/token --with-decryption --query 'Parameter.Value' --output text)
+                TOKEN=$(aws --region=us-east-1 ssm get-parameter --name /Kabacargah/phonebook/token --with-decryption --query 'Parameter.Value' --output text)
                 cd /home/ec2-user
-                git clone https://$TOKEN@github.com/awsdevopsteam/phonebook-web-app.git
-                python3 /home/ec2-user/phonebook-web-app/phonebook-app.py
+                git clone https://$TOKEN@github.com/kabacargah/Phonebook-Application.git
+                python3 /home/ec2-user/Phonebook-Application/phonebook-app.py
               - MyDBURI: !GetAtt DBInstance.Endpoint.Address
               
   TG:
@@ -175,7 +175,7 @@ Resources:
       Engine: MySQL
       EngineVersion: 8.0.32 
       MasterUsername: !Ref MyDbusername
-      MasterUserPassword: '{{resolve:ssm-secure:/osvaldo/phonebook/password:1}}'
+      MasterUserPassword: '{{resolve:ssm-secure:/Kabacargah/phonebook/password:1}}'
       Port: 3306 
       PubliclyAccessible: true
 
